@@ -1,0 +1,43 @@
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# ---- Virtual Environments ----
+.venv/
+venv/
+yolo_env/
+env/
+
+# ---- IDE / Editor ----
+.idea/
+.vscode/
+*.iml
+
+# ---- OS files ----
+.DS_Store
+Thumbs.db
+
+# ---- Model Weights (YOLO / ML) ----
+*.pt
+*.onnx
+*.h5
+
+# ---- Images / Outputs ----
+image/
+outputs/
+runs/
+results/
+
+# ---- Screenshots ----
+*.png
+*.jpg
+*.jpeg
+
+# ---- Environment & Secrets ----
+.env
+
+# ---- Jupyter ----
+.ipynb_checkpoints/
