@@ -32,6 +32,7 @@
 ---
 
 ##  System Architecture
+#```
 Webcam Feed
 │
 ├──▶ YOLOv8 Ball Model ──▶ Kalman Filter ──▶ Trajectory + Distance
@@ -42,10 +43,11 @@ Webcam Feed
 ┌──────────────────────┐     ┌──────────────────────┐
 │   Camera View (Raw)  │     │  Custom UI (BG Image) │
 └──────────────────────┘     └──────────────────────┘
-
+```
 ---
 
 ## 📁 Project Structure
+#```
 ShootSeer-AI/
 │
 ├── main.py                         # Core detection & tracking loop
@@ -55,6 +57,7 @@ ShootSeer-AI/
 │   └── Screenshot 2026-02-06...png # Custom UI background
 ├── requirements.txt
 └── README.md
+```
 
 ---
 
