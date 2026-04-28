@@ -88,7 +88,7 @@ python main.py
 ---
 
 ## 🔧 Configuration
-
+```bash
 | Parameter | Default | Description |
 |---|---|---|
 | `REAL_BALL_DIAMETER` | `0.24 m` | Standard basketball diameter |
@@ -97,10 +97,11 @@ python main.py
 | `UI_WIDTH / UI_HEIGHT` | `800 × 600` | Output canvas resolution |
 | Ball confidence | `0.5` | YOLOv8 detection threshold |
 | Pose confidence | `0.4` | Pose estimation threshold |
-
+```
 ---
 
 ## 🦴 Pose Skeleton Map
+```bash
 Nose
 │
 L.Shoulder ─── R.Shoulder
@@ -114,6 +115,7 @@ L.Knee          R.Knee
 │                  │
 L.Ankle         R.Ankle
 12 limb connections rendered with distinct colors per joint pair.
+```
 
 ---
 
@@ -128,18 +130,18 @@ L.Ankle         R.Ankle
 
 ## 🚀 Roadmap
 
-- [ ] Speed & velocity calculation (px/frame → m/s)
-- [ ] Shot arc angle detection
-- [ ] Player ID tracking across frames
-- [ ] Action classification (dribble / pass / shoot)
-- [ ] Streamlit dashboard with live stats
-- [ ] Multi-camera support
+-  Speed & velocity calculation (px/frame → m/s)
+-  Shot arc angle detection
+-  Player ID tracking across frames
+-  Action classification (dribble / pass / shoot)
+-  Streamlit dashboard with live stats
+-  Multi-camera support
 
 ---
 
 ## 👩‍💻 Author
 
-**Priyadharshini K** — AI & Data Science, Chennai Institute of Technology (2024–2028)
+**Priyadharshini K** 
 
 [![GitHub](https://img.shields.io/badge/GitHub-Priyadharshinik15-181717?style=flat&logo=github)](https://github.com/Priyadharshinik15)
 
