@@ -2,9 +2,7 @@ import cv2
 import numpy as np
 from ultralytics import YOLO
 
-# -----------------------------
-# Load models
-# -----------------------------
+
 ball_model = YOLO("best.pt")
 pose_model = YOLO("yolov8s-pose.pt")
 
@@ -13,11 +11,9 @@ if not cap.isOpened():
     print("Camera not opened")
     exit(1)
 
-# -----------------------------
-# Parameters
-# -----------------------------
-REAL_BALL_DIAMETER = 0.24  # meters
-FOCAL_LENGTH = 800          # pixels
+
+REAL_BALL_DIAMETER = 0.24  
+FOCAL_LENGTH = 800          
 trajectory = []
 MAX_TRAJECTORY = 30
 
@@ -30,9 +26,7 @@ kalman.transitionMatrix = np.array([[1, 0, 1, 0],
                                     [0, 0, 0, 1]], np.float32)
 kalman.processNoiseCov = np.eye(4, dtype=np.float32) * 0.03
 
-# -----------------------------
-# Skeleton & colors
-# -----------------------------
+
 SKELETON = [
     (5, 7), (7, 9), (6, 8), (8, 10),
     (5, 6), (5, 11), (6, 12),
@@ -58,9 +52,6 @@ if bg_image is None:
     exit(1)
 bg_image = cv2.resize(bg_image, (UI_WIDTH, UI_HEIGHT))
 
-# -----------------------------
-# Main loop
-# -----------------------------
 while True:
     ret, frame = cap.read()
     if not ret:
@@ -68,15 +59,10 @@ while True:
 
     h, w, _ = frame.shape
 
-    # -----------------------------
-    # Create canvases
-    # -----------------------------
-    canvas = bg_image.copy()          # Custom UI with background
-    camera_view = frame.copy()        # Camera feed with annotations
+    canvas = bg_image.copy()         
+    camera_view = frame.copy()       
 
-    # -----------------------------
-    # Ball detection
-    # -----------------------------
+  
     ball_results = ball_model.predict(frame, conf=0.5, verbose=False)
     ball_detected = False
     ball_pixel_size = 0
@@ -90,7 +76,7 @@ while True:
             ball_detected = True
             ball_pixel_size = x2 - x1
 
-            # Kalman filter update
+            
             measurement = np.array([[np.float32(cx)], [np.float32(cy)]])
             kalman.correct(measurement)
             pred = kalman.predict()
@@ -99,34 +85,31 @@ while True:
             if len(trajectory) > MAX_TRAJECTORY:
                 trajectory.pop(0)
 
-            # Draw ball on both canvases
+            
             scale_x = UI_WIDTH / w
             scale_y = UI_HEIGHT / h
 
-            # Custom UI
+    
             px_ui, py_ui = int(px * scale_x), int(py * scale_y)
             ball_radius = int(ball_pixel_size/2 * scale_x)
             cv2.circle(canvas, (px_ui, py_ui), ball_radius, (0,255,0), -1)
 
-            # Camera view
             cv2.circle(camera_view, (px, py), ball_pixel_size//2, (0,255,0), -1)
             break
 
     if not ball_detected:
         trajectory.clear()
 
-    # Draw ball trajectory
+    
     if len(trajectory) > 1:
-        # Custom UI
-        traj_points = [(int(p[0]*UI_WIDTH/w), int(p[1]*UI_HEIGHT/h)) for p in trajectory]
+
+        traj_point = [(int(p[0]*UI_WIDTH/w), int(p[1]*UI_HEIGHT/h)) for p in trajectory]
         cv2.polylines(canvas, [np.array(traj_points, dtype=np.int32)], False, (0,0,255), 3)
 
-        # Camera view
+    
         cv2.polylines(camera_view, [np.array(trajectory, dtype=np.int32)], False, (0,0,255), 3)
 
-    # -----------------------------
-    # Human pose estimation
-    # -----------------------------
+
     pose_results = pose_model.predict(frame, conf=0.4, verbose=False)
     for pr in pose_results:
         if pr.keypoints is None:
@@ -162,9 +145,7 @@ while True:
                 # Camera view
                 cv2.line(camera_view, (int(x1), int(y1)), (int(x2), int(y2)), color, 3)
 
-    # -----------------------------
-    # Display
-    # -----------------------------
+
     cv2.imshow("Camera View with Annotations", camera_view)
     cv2.imshow("Custom UI - Ball & Pose", canvas)
 
