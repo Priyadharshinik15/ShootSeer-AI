@@ -18,16 +18,16 @@
 
 ---
 
-## ✨ Features
+##  Features
 
 | Feature | Description |
 |---|---|
-| 🏀 **Ball Detection** | Custom-trained YOLOv8 model (`best.pt`) with 0.5 confidence threshold |
-| 📍 **Trajectory Tracking** | Kalman filter for smooth motion prediction, 30-frame trail |
-| 🧍 **Pose Estimation** | YOLOv8s-Pose with 17-keypoint skeleton rendering |
-| 📐 **Distance Estimation** | Real-world distance via pinhole camera model |
-| 🎨 **Dual Canvas** | Live annotated camera view + custom background UI overlay |
-| ⚡ **Real-Time** | Processes webcam feed at inference speed |
+|  **Ball Detection** | Custom-trained YOLOv8 model (`best.pt`) with 0.5 confidence threshold |
+|  **Trajectory Tracking** | Kalman filter for smooth motion prediction, 30-frame trail |
+|  **Pose Estimation** | YOLOv8s-Pose with 17-keypoint skeleton rendering |
+|  **Distance Estimation** | Real-world distance via pinhole camera model |
+|  **Dual Canvas** | Live annotated camera view + custom background UI overlay |
+|  **Real-Time** | Processes webcam feed at inference speed |
 
 ---
 
@@ -46,13 +46,13 @@ Webcam Feed
 ```
 ---
 
-## 📁 Project Structure
+##  Project Structure
 ```bash
 ShootSeer-AI/
 │
-├── main.py                         # Core detection & tracking loop
-├── best.pt                         # Custom YOLOv8 ball detection model
-├── yolov8s-pose.pt                 # YOLOv8 pose estimation model
+├── main.py                         
+├── best.pt                         
+├── yolov8s-pose.pt                 
 ├── image/
 │   └── Screenshot 2026-02-06...png # Custom UI background
 ├── requirements.txt
@@ -90,7 +90,7 @@ python main.py
 
 ---
 
-## 🔧 Configuration
+##  Configuration
 ```bash
 | Parameter | Default | Description |
 |---|---|---|
@@ -103,7 +103,7 @@ python main.py
 ```
 ---
 
-## 🦴 Pose Skeleton Map
+##  Pose Skeleton Map
 ```bash
 Nose
 │
@@ -122,7 +122,7 @@ L.Ankle         R.Ankle
 
 ---
 
-## 📊 Metrics Computed
+##  Metrics Computed
 
 - **Ball Position** — pixel (cx, cy) smoothed via Kalman filter
 - **Distance to Ball** — `D = (REAL_DIAMETER × FOCAL_LENGTH) / pixel_width`
@@ -131,7 +131,7 @@ L.Ankle         R.Ankle
 
 ---
 
-## 🚀 Roadmap
+##  Roadmap
 
 -  Speed & velocity calculation (px/frame → m/s)
 -  Shot arc angle detection
@@ -142,7 +142,7 @@ L.Ankle         R.Ankle
 
 ---
 
-## 👩‍💻 Author
+##  Author
 
 **Priyadharshini K** 
 
