@@ -2,9 +2,7 @@ import cv2
 import numpy as np
 from ultralytics import YOLO
 
-# -----------------------------
-# Load models
-# -----------------------------
+
 ball_model = YOLO("best.pt")
 pose_model = YOLO("yolov8s-pose.pt")
 
@@ -13,9 +11,7 @@ if not cap.isOpened():
     print("Camera not opened")
     exit(1)
 
-# -----------------------------
-# Parameters
-# -----------------------------
+
 REAL_BALL_DIAMETER = 0.24  # meters
 FOCAL_LENGTH = 800          # pixels
 trajectory = []
@@ -30,9 +26,7 @@ kalman.transitionMatrix = np.array([[1, 0, 1, 0],
                                     [0, 0, 0, 1]], np.float32)
 kalman.processNoiseCov = np.eye(4, dtype=np.float32) * 0.03
 
-# -----------------------------
-# Skeleton & colors
-# -----------------------------
+
 SKELETON = [
     (5, 7), (7, 9), (6, 8), (8, 10),
     (5, 6), (5, 11), (6, 12),
@@ -48,9 +42,7 @@ COLORS = [
 
 UI_WIDTH, UI_HEIGHT = 800, 600
 
-# -----------------------------
-# Load background image
-# -----------------------------
+
 BG_PATH = "Screenshot 2026-02-06 205556.png"  # <-- update this path
 bg_image = cv2.imread(BG_PATH)
 if bg_image is None:
@@ -58,9 +50,7 @@ if bg_image is None:
     exit(1)
 bg_image = cv2.resize(bg_image, (UI_WIDTH, UI_HEIGHT))
 
-# -----------------------------
-# Main loop
-# -----------------------------
+
 while True:
     ret, frame = cap.read()
     if not ret:
@@ -68,15 +58,11 @@ while True:
 
     h, w, _ = frame.shape
 
-    # -----------------------------
-    # Create canvases
-    # -----------------------------
+  
     canvas = bg_image.copy()          # Custom UI with background
     camera_view = frame.copy()        # Camera feed with annotations
 
-    # -----------------------------
-    # Ball detection
-    # -----------------------------
+    
     ball_results = ball_model.predict(frame, conf=0.5, verbose=False)
     ball_detected = False
     ball_pixel_size = 0
@@ -124,9 +110,6 @@ while True:
         # Camera view
         cv2.polylines(camera_view, [np.array(trajectory, dtype=np.int32)], False, (0,0,255), 3)
 
-    # -----------------------------
-    # Human pose estimation
-    # -----------------------------
     pose_results = pose_model.predict(frame, conf=0.4, verbose=False)
     for pr in pose_results:
         if pr.keypoints is None:
@@ -162,9 +145,7 @@ while True:
                 # Camera view
                 cv2.line(camera_view, (int(x1), int(y1)), (int(x2), int(y2)), color, 3)
 
-    # -----------------------------
-    # Display
-    # -----------------------------
+    
     cv2.imshow("Camera View with Annotations", camera_view)
     cv2.imshow("Custom UI - Ball & Pose", canvas)
 
