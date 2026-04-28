@@ -32,7 +32,7 @@
 ---
 
 ##  System Architecture
-#```
+```bash
 Webcam Feed
 │
 ├──▶ YOLOv8 Ball Model ──▶ Kalman Filter ──▶ Trajectory + Distance
@@ -47,7 +47,7 @@ Webcam Feed
 ---
 
 ## 📁 Project Structure
-#```
+```bash
 ShootSeer-AI/
 │
 ├── main.py                         # Core detection & tracking loop
