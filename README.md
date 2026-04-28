@@ -150,6 +150,4 @@ L.Ankle         R.Ankle
 
 ---
 
-<div align="center">
-Made with 🏀 + Computer Vision
-</div>
+
